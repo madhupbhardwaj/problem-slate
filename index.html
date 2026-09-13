@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="problem-slate is a focused, pressure-aware whiteboard for macOS.">
+  <title>problem-slate — a focused whiteboard for macOS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090909'/%3E%3Crect x='12' y='12' width='40' height='40' rx='9' fill='none' stroke='%23f5f5f5' stroke-width='3'/%3E%3Cpath d='M39 20l6 6-17 17-9 3 3-9z' fill='%23f5f5f5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="problem-slate home">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg>
+      <span>problem-slate</span>
+    </a>
+    <nav aria-label="Main navigation"><a href="#features">Features</a><a href="#install">Install</a><a class="nav-download" href="downloads/problem-slate-macOS.zip" download>Download</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A native whiteboard for macOS</p>
+        <h1 id="hero-title">Think with<br>your pen.</h1>
+        <p class="lede">A quiet canvas for working through problems. Write naturally with a pen tablet, highlight what matters, and keep your board close.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="downloads/problem-slate-macOS.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>Download for Mac</a>
+          <a class="button secondary" href="#install">Installation steps</a>
+        </div>
+        <p class="release-note">Version 1.4 · macOS 13 or later · Apple silicon and Intel</p>
+      </div>
+      <div class="product-frame" aria-label="Illustration of the problem-slate drawing canvas">
+        <div class="window-bar"><span class="traffic red"></span><span class="traffic yellow"></span><span class="traffic green"></span><span class="window-title">problem-slate</span></div>
+        <div class="app-body">
+          <div class="tool-rail" aria-hidden="true"><span class="tool active"><i class="round-tip"></i>Pen</span><span class="tool"><i class="chisel-tip"></i>Chisel</span><span class="tool"><i class="highlight-tip"></i>Highlight</span><span class="tool"><i class="eraser-tip"></i>Erase</span></div>
+          <div class="canvas">
+            <div class="problem">∫ <span>x² + 2x</span> dx</div>
+            <svg class="ink" viewBox="0 0 560 310" aria-hidden="true"><path d="M74 124c51 7 99 2 153-3"></path><path class="answer" d="M94 188c28 7 42 9 71 4 31-5 57-18 89-13 27 4 48 22 77 19 40-5 67-37 112-28"></path><path class="highlight" d="M281 88c45-4 90-5 137-1"></path></svg>
+            <span class="annotation">work it out</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="feature-strip" id="features" aria-labelledby="features-title">
+      <div class="section-intro"><p class="eyebrow">Made for working things out</p><h2 id="features-title">Only the tools<br>you need.</h2></div>
+      <div class="feature-grid">
+        <article><span>01</span><h3>Natural ink</h3><p>Round and chisel pens respond to pressure from supported pen tablets.</p></article>
+        <article><span>02</span><h3>Mark it up</h3><p>Paste images, move and resize them, then write or highlight on top.</p></article>
+        <article><span>03</span><h3>Light or dark</h3><p>Switch the board to black and your black ink becomes white automatically.</p></article>
+        <article><span>04</span><h3>Keep your work</h3><p>Save editable boards, recover your latest work, or export the full canvas as PNG.</p></article>
+      </div>
+    </section>
+    <section class="install" id="install" aria-labelledby="install-title">
+      <div class="install-heading"><p class="eyebrow">Install</p><h2 id="install-title">Three steps.<br>One local build.</h2></div>
+      <ol class="steps">
+        <li><span>1</span><div><h3>Download and unzip</h3><p>Download the package, then double-click the ZIP in Finder.</p></div></li>
+        <li><span>2</span><div><h3>Run the builder</h3><p>In Terminal, type <code>bash </code>, drag <strong>Build-and-Run.command</strong> into the window, and press Return.</p></div></li>
+        <li><span>3</span><div><h3>Move it to Applications</h3><p>Drag <strong>dist/problem-slate.app</strong> into your Applications folder.</p></div></li>
+      </ol>
+      <div class="requirements"><strong>Before you start</strong><p>This release contains source code and builds on your Mac. It requires macOS 13+ and Apple Command Line Tools. If needed, run <code>xcode-select --install</code> once. The app is locally signed and has not been Apple-notarized.</p></div>
+    </section>
+    <section class="download-band" aria-labelledby="download-title">
+      <img src="app-icon.png" width="112" height="112" alt="problem-slate pen icon">
+      <div><h2 id="download-title">Your next idea needs room.</h2><p>Open a clean board and start writing.</p></div>
+      <a class="button light" href="downloads/problem-slate-macOS.zip" download>Download problem-slate</a>
+    </section>
+  </main>
+  <footer>
+    <a class="brand footer-brand" href="#top"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg><span>problem-slate</span></a>
+    <p>Focused tools for difficult problems.</p><a href="downloads/problem-slate-macOS.zip" download>Download v1.4</a>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

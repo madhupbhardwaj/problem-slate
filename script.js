@@ -1,0 +1,2 @@
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduceMotion&&'IntersectionObserver'in window){const elements=document.querySelectorAll('.feature-grid article,.steps li');elements.forEach((el)=>el.classList.add('reveal'));const observer=new IntersectionObserver((entries)=>{entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.14});elements.forEach((el)=>observer.observe(el))}
