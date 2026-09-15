@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090909">
-  <meta name="description" content="problem-slate is a focused, pressure-aware whiteboard for macOS.">
-  <title>problem-slate — a focused whiteboard for macOS</title>
+  <meta name="description" content="problem-slate is a focused, pressure-aware whiteboard for macOS and Windows.">
+  <title>problem-slate — a focused whiteboard for macOS and Windows</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090909'/%3E%3Crect x='12' y='12' width='40' height='40' rx='9' fill='none' stroke='%23f5f5f5' stroke-width='3'/%3E%3Cpath d='M39 20l6 6-17 17-9 3 3-9z' fill='%23f5f5f5'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,19 +15,19 @@
       <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg>
       <span>problem-slate</span>
     </a>
-    <nav aria-label="Main navigation"><a href="#features">Features</a><a href="#install">Install</a><a class="nav-download" href="downloads/problem-slate-macOS.zip" download>Download</a></nav>
+    <nav aria-label="Main navigation"><a href="#features">Features</a><a href="#install">Install</a><a class="nav-download" href="#downloads">Download</a></nav>
   </header>
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">A native whiteboard for macOS</p>
+        <p class="eyebrow">A focused whiteboard for macOS and Windows</p>
         <h1 id="hero-title">Think with<br>your pen.</h1>
         <p class="lede">A quiet canvas for working through problems. Write naturally with a pen tablet, highlight what matters, and keep your board close.</p>
-        <div class="hero-actions">
+        <div class="hero-actions" id="downloads">
           <a class="button primary" href="downloads/problem-slate-macOS.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>Download for Mac</a>
-          <a class="button secondary" href="#install">Installation steps</a>
+          <a class="button secondary" href="downloads/problem-slate-Windows-source.zip" download>Download for Windows</a>
         </div>
-        <p class="release-note">Version 1.4 · macOS 13 or later · Apple silicon and Intel</p>
+        <p class="release-note">Developer previews · Source packages — one local build required.<br>Mac: macOS 13+ · Windows: Windows 11 x64.<br><a href="#install">Mac installation</a> · <a href="#install-windows">Windows installation</a></p>
       </div>
       <div class="product-frame" aria-label="Illustration of the problem-slate drawing canvas">
         <div class="window-bar"><span class="traffic red"></span><span class="traffic yellow"></span><span class="traffic green"></span><span class="window-title">problem-slate</span></div>
@@ -44,14 +44,14 @@
     <section class="feature-strip" id="features" aria-labelledby="features-title">
       <div class="section-intro"><p class="eyebrow">Made for working things out</p><h2 id="features-title">Only the tools<br>you need.</h2></div>
       <div class="feature-grid">
-        <article><span>01</span><h3>Natural ink</h3><p>Round and chisel pens respond to pressure from supported pen tablets.</p></article>
+        <article><span>01</span><h3>Natural ink</h3><p>Round and chisel pens respond to pressure from supported pen tablets. Pan across an adjustable 4096 × 4096 canvas.</p></article>
         <article><span>02</span><h3>Mark it up</h3><p>Paste images, move and resize them, then write or highlight on top.</p></article>
         <article><span>03</span><h3>Light or dark</h3><p>Switch the board to black and your black ink becomes white automatically.</p></article>
         <article><span>04</span><h3>Keep your work</h3><p>Save editable boards, recover your latest work, or export the full canvas as PNG.</p></article>
       </div>
     </section>
     <section class="install" id="install" aria-labelledby="install-title">
-      <div class="install-heading"><p class="eyebrow">Install</p><h2 id="install-title">Three steps.<br>One local build.</h2></div>
+      <div class="install-heading"><p class="eyebrow">Install</p><h2 id="install-title">On your Mac.<br>One local build.</h2></div>
       <ol class="steps">
         <li><span>1</span><div><h3>Download and unzip</h3><p>Download the package, then double-click the ZIP in Finder.</p></div></li>
         <li><span>2</span><div><h3>Run the builder</h3><p>In Terminal, type <code>bash </code>, drag <strong>Build-and-Run.command</strong> into the window, and press Return.</p></div></li>
@@ -59,21 +59,25 @@
       </ol>
       <div class="requirements"><strong>Before you start</strong><p>This release contains source code and builds on your Mac. It requires macOS 13+ and Apple Command Line Tools. If needed, run <code>xcode-select --install</code> once. The app is locally signed and has not been Apple-notarized.</p></div>
     </section>
+    <section class="install" id="install-windows" aria-labelledby="windows-title">
+      <div class="install-heading"><p class="eyebrow">Windows developer preview</p><h2 id="windows-title">The same tools.<br>A Windows canvas.</h2></div>
+      <ol class="steps">
+        <li><span>1</span><div><h3>Download and extract</h3><p>Choose Download for Windows, then use <strong>Extract All</strong> on the ZIP.</p></div></li>
+        <li><span>2</span><div><h3>Install the free build tools</h3><p>Install the <a href="https://dotnet.microsoft.com/download/dotnet/10.0">.NET 10 SDK for Windows x64</a>. This is needed only to build the app.</p></div></li>
+        <li><span>3</span><div><h3>Build once, then open</h3><p>Double-click <strong>Build-and-Run.cmd</strong>. Afterwards, open <strong>dist/win-x64/problem-slate.exe</strong> directly.</p></div></li>
+      </ol>
+      <div class="requirements"><strong>Preview status</strong><p>The Windows source has not yet been compiled or tested on Windows or pen-tablet hardware. It includes pen, chisel, highlighter, eraser, pan, image paste, dark mode, undo and recovery. Windows boards use .wslate; Mac .slate files are not interchangeable. Use PNG to share flattened boards. No paid developer account is required. The built EXE is unsigned.</p></div>
+    </section>
     <section class="download-band" aria-labelledby="download-title">
       <img src="app-icon.png" width="112" height="112" alt="problem-slate pen icon">
       <div><h2 id="download-title">Your next idea needs room.</h2><p>Open a clean board and start writing.</p></div>
-      <a class="button light" href="downloads/problem-slate-macOS.zip" download>Download problem-slate</a>
+      <a class="button light" href="#downloads">Choose your download</a>
     </section>
   </main>
   <footer>
     <a class="brand footer-brand" href="#top"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg><span>problem-slate</span></a>
-    <p>Focused tools for difficult problems.</p><a href="downloads/problem-slate-macOS.zip" download>Download v1.4</a>
+    <p>Focused tools for difficult problems.</p><a href="#downloads">Mac &amp; Windows downloads</a>
   </footer>
   <script src="script.js"></script>
-  <!-- Vercel Web Analytics -->
-<script defer src="/_vercel/insights/script.js"></script>
-
-<!-- Vercel Speed Insights -->
-<script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
