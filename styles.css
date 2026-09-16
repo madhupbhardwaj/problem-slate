@@ -5,3 +5,6 @@
 
 .hero-actions { flex-wrap: wrap; }
 .release-note a, .requirements a, .steps a { color: inherit; text-underline-offset: 3px; }
+.tool-rail{gap:7px}
+.tool{height:38px}
+.tool img{width:18px;height:18px;object-fit:contain;flex:none}

@@ -1,17 +1,18 @@
 # problem-slate website — Mac + Windows developer previews
 
-This is an updated static website package for the existing Vercel/GitHub deployment.
-It is not automatically deployed. Windows links currently download source and build
-instructions, clearly labeled as an untested developer preview.
+This is the updated static website package for the existing Vercel/GitHub deployment.
+It is not automatically deployed. Both buttons include the latest interface-aligned
+source packages. Windows remains clearly labeled as an untested developer preview.
 
 ## Deploy using your existing GitHub → Vercel connection
 1. Extract this ZIP.
 2. Replace the matching index.html, styles.css and script.js files in your website repository.
-3. Copy downloads/problem-slate-Windows-source.zip into your repository's downloads folder.
-4. Keep downloads/problem-slate-macOS.zip and app-icon.png (also included here).
-5. Preserve any custom domain configuration, analytics snippets, and changes you made after
+3. Upload the complete downloads folder. It replaces both earlier source packages.
+4. Upload the assets folder as well; the website preview uses the shared tool icons.
+5. Keep app-icon.png at the website root (it is included here).
+6. Preserve any custom domain configuration, analytics snippets, and changes you made after
    the original website package. This copy is based on the earlier site files in this chat.
-6. Commit to the branch connected to Vercel. Wait for the deployment to finish, then test both links.
+7. Commit to the branch connected to Vercel. Wait for the deployment to finish, then test both links.
 
 If importing as a new Vercel project, choose Other/static, with no build command and
 root output directory. No npm dependencies or backend are needed.
