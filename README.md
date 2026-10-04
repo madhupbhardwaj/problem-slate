@@ -9,7 +9,8 @@ source packages. Windows remains clearly labeled as an untested developer previe
 2. Replace the matching index.html, styles.css and script.js files in your website repository.
 3. Upload the complete downloads folder. It replaces both earlier source packages.
 4. Upload the assets folder as well; the website preview uses the shared tool icons.
-5. Keep app-icon.png at the website root (it is included here).
+5. Keep app-icon.png, favicon.ico, favicon-32x32.png and apple-touch-icon.png at
+   the website root (all are included here).
 6. Preserve any custom domain configuration, analytics snippets, and changes you made after
    the original website package. This copy is based on the earlier site files in this chat.
 7. Commit to the branch connected to Vercel. Wait for the deployment to finish, then test both links.
