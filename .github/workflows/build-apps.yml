@@ -12,6 +12,7 @@ permissions:
 jobs:
   macos:
     runs-on: macos-15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Unpack Mac source
@@ -42,6 +43,7 @@ jobs:
 
   windows:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -50,21 +52,26 @@ jobs:
       - name: Unpack Windows source
         shell: pwsh
         run: Expand-Archive downloads/problem-slate-Windows-source.zip -DestinationPath build
-      - name: Build and run board smoke tests
+      - name: Build
         shell: pwsh
         working-directory: build/problem-slate-windows
+        run: dotnet build ProblemSlate.csproj -c Release --disable-build-servers -p:UseSharedCompilation=false
+      - name: Run board smoke tests
+        shell: pwsh
+        timeout-minutes: 5
+        working-directory: build/problem-slate-windows
         run: |
-          dotnet build ProblemSlate.csproj -c Release
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          $process = Start-Process dotnet -ArgumentList 'bin/Release/net10.0-windows/problem-slate.dll --smoke-test' -PassThru -Wait
+          $process = Start-Process dotnet -ArgumentList 'bin/Release/net10.0-windows/problem-slate.dll --smoke-test' -PassThru
+          if (-not $process.WaitForExit(180000)) { Stop-Process -Id $process.Id -Force; Write-Error 'Smoke tests timed out'; exit 1 }
           Get-Content smoke-test-result.txt
           if ($process.ExitCode -ne 0) { exit $process.ExitCode }
-      - name: Check the published EXE starts its smoke tests
+      - name: Check the published EXE passes its smoke tests
         shell: pwsh
+        timeout-minutes: 5
         run: |
           Expand-Archive downloads/problem-slate-Windows.zip -DestinationPath published
-          Push-Location published/problem-slate-Windows
-          $process = Start-Process ./problem-slate.exe -ArgumentList '--smoke-test' -PassThru -Wait
+          Set-Location published/problem-slate-Windows
+          $process = Start-Process ./problem-slate.exe -ArgumentList '--smoke-test' -PassThru
+          if (-not $process.WaitForExit(180000)) { Stop-Process -Id $process.Id -Force; Write-Error 'Smoke tests timed out'; exit 1 }
           Get-Content smoke-test-result.txt
-          Pop-Location
           if ($process.ExitCode -ne 0) { exit $process.ExitCode }
