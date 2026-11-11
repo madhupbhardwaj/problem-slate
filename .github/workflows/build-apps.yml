@@ -23,10 +23,12 @@ jobs:
       - name: Run tests
         working-directory: build/Slate
         run: swift test
-      - name: Assemble problem-slate.app
+      - name: Assemble universal problem-slate.app (Apple silicon + Intel)
         working-directory: build/Slate
         run: |
-          BIN_DIR="$(swift build -c release --show-bin-path)"
+          swift build -c release --arch arm64 --arch x86_64
+          BIN_DIR="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)"
+          lipo -info "$BIN_DIR/Slate"
           APP="$PWD/dist/problem-slate.app"
           mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
           cp "$BIN_DIR/Slate" "$APP/Contents/MacOS/problem-slate"
