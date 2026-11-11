@@ -5,12 +5,19 @@ Static site deployed from GitHub to Vercel. Downloads in `downloads/`:
 
 | File | What it is |
 | --- | --- |
+| `problem-slate-macOS-app.zip` | Ready-to-run universal Mac app (Apple silicon + Intel), ad-hoc signed, not notarized |
 | `problem-slate-macOS.zip` | Mac source; `Build-and-Run.command` builds `problem-slate.app` locally |
 | `problem-slate-Windows.zip` | Ready-to-run Windows x64 app (single self-contained `problem-slate.exe`, ~59 MB) |
 | `problem-slate-Windows-source.zip` | Windows WPF source and build script |
 
 `.github/workflows/build-apps.yml` compiles and tests both apps from these ZIPs on every
-change to `downloads/`. The macOS job also uploads a built `problem-slate.app` as a run artifact.
+change to `downloads/`, and checks the published Mac app's signature and the Windows EXE.
+The macOS job uploads a freshly built universal `problem-slate.app` as a run artifact.
+
+## Updating the Mac app
+After changing `problem-slate-macOS.zip`, push it, wait for the "Build apps" workflow, download
+its `problem-slate-macOS-app` artifact, and replace `downloads/problem-slate-macOS-app.zip` with
+the `problem-slate-macOS-app.zip` inside it.
 
 ## Deploy using your existing GitHub → Vercel connection
 1. Extract this ZIP.

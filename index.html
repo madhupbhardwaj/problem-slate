@@ -31,16 +31,16 @@
         <h1 id="hero-title">Think with<br>your pen.</h1>
         <p class="lede">A quiet canvas for working through problems. Write naturally with a pen tablet, snap a straight line with Shift, highlight what matters and keep your board close.</p>
         <div class="hero-actions" id="downloads">
-          <a class="button primary" data-os="mac" href="downloads/problem-slate-macOS.zip" download>
+          <a class="button primary" data-os="mac" href="downloads/problem-slate-macOS-app.zip" download>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>
-            <span>Download for Mac<small>Source · builds in one step · 130 KB</small></span>
+            <span>Download for Mac<small>Ready to run · Apple silicon &amp; Intel · 0.6 MB</small></span>
           </a>
           <a class="button secondary" data-os="windows" href="downloads/problem-slate-Windows.zip" download>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>
             <span>Download for Windows<small>Ready to run · .exe · 59 MB</small></span>
           </a>
         </div>
-        <p class="release-note">Version 1.7 previews · macOS 13+ · Windows 10/11 x64.<br><a href="#install">Mac installation</a> · <a href="#install-windows">Windows installation</a> · <a href="downloads/problem-slate-Windows-source.zip" download>Windows source</a></p>
+        <p class="release-note">Version 1.7 previews · macOS 13+ · Windows 10/11 x64.<br><a href="#install">Mac installation</a> · <a href="#install-windows">Windows installation</a> · Source: <a href="downloads/problem-slate-macOS.zip" download>Mac</a>, <a href="downloads/problem-slate-Windows-source.zip" download>Windows</a></p>
       </div>
 
       <div class="product-frame" aria-label="Illustration of the problem-slate app: a dark sidebar of tools beside a dotted white board with handwritten working">
@@ -87,7 +87,7 @@
         <li><kbd>⌘9</kbd><h3>Zoom to fit</h3><p>Zoom from 10% to 400%, around your pointer. Pinch on a Mac trackpad, fit the whole board, and pan with Space.</p></li>
         <li><kbd>Drop</kbd><h3>Drag in images</h3><p>Drop image files straight onto the board, then nudge them into place with the arrow keys.</p></li>
         <li><kbd>⇧⌘C</kbd><h3>Copy the board</h3><p>Copy the whole board as an image and paste it into a chat, an email or your notes.</p></li>
-        <li><kbd>.exe</kbd><h3>Windows, ready to run</h3><p>The Windows version is now a single EXE. Extract it and double-click. Nothing to build or install.</p></li>
+        <li><kbd>.app</kbd><h3>Ready to run</h3><p>Both downloads are now finished apps: a universal Mac app and a single Windows EXE. Nothing to build or install.</p></li>
       </ul>
     </section>
 
@@ -120,13 +120,13 @@
     </section>
 
     <section class="install" id="install" aria-labelledby="install-title">
-      <div class="install-heading"><p class="eyebrow">Install on Mac</p><h2 id="install-title">On your Mac.<br>One local build.</h2></div>
+      <div class="install-heading"><p class="eyebrow">Install on Mac</p><h2 id="install-title">On your Mac.<br>Nothing to build.</h2></div>
       <ol class="steps">
-        <li><span>1</span><div><h3>Download and unzip</h3><p><a href="downloads/problem-slate-macOS.zip" download>Download the Mac package</a>, then double-click the ZIP in Finder.</p></div></li>
-        <li><span>2</span><div><h3>Run the builder</h3><p>In Terminal, type <code>bash </code>, drag <strong>Build-and-Run.command</strong> into the window, and press Return. problem-slate opens when the build finishes.</p></div></li>
-        <li><span>3</span><div><h3>Move it to Applications</h3><p>Drag <strong>dist/problem-slate.app</strong> into your Applications folder.</p></div></li>
+        <li><span>1</span><div><h3>Download and unzip</h3><p><a href="downloads/problem-slate-macOS-app.zip" download>Download for Mac</a>. Safari unzips it for you; otherwise double-click the ZIP in Finder.</p></div></li>
+        <li><span>2</span><div><h3>Move it to Applications</h3><p>Drag <strong>problem-slate.app</strong> into your Applications folder.</p></div></li>
+        <li><span>3</span><div><h3>Open it the first time</h3><p>The app isn't notarized by Apple yet, so macOS asks first. On macOS 15 or later, open it once, then go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. On macOS 13–14, Control-click the app, choose <strong>Open</strong>, then <strong>Open</strong> again.</p></div></li>
       </ol>
-      <div class="requirements"><strong>Before you start</strong><p>This release contains source code and builds on your Mac. It requires macOS 13+ and Apple Command Line Tools. If needed, run <code>xcode-select --install</code> once. The app is locally signed and has not been Apple-notarized. Updating from 1.6? Your <code>.slate</code> boards and recovery data carry over.</p></div>
+      <div class="requirements"><strong>Good to know</strong><p>A universal app for Apple silicon and Intel Macs running macOS 13 or later. It's compiled and its automated tests pass on a macOS build machine, but this release hasn't yet been hands-on tested on a Mac or with pen tablets. Updating from 1.6? Your <code>.slate</code> boards and recovery data carry over. Prefer to build it yourself? The <a href="downloads/problem-slate-macOS.zip" download>Mac source</a> builds with one command and Apple's Command Line Tools.</p></div>
     </section>
 
     <section class="install" id="install-windows" aria-labelledby="windows-title">
@@ -136,7 +136,7 @@
         <li><span>2</span><div><h3>Open problem-slate.exe</h3><p>Double-click <strong>problem-slate.exe</strong> in the extracted folder. Everything it needs is inside the EXE.</p></div></li>
         <li><span>3</span><div><h3>If Windows asks</h3><p>The app isn't code-signed yet, so SmartScreen may show "Windows protected your PC". Choose <strong>More info</strong>, then <strong>Run anyway</strong>.</p></div></li>
       </ol>
-      <div class="requirements"><strong>Preview status</strong><p>Version 1.7 for Windows 10/11 x64 is compiled and passes its automated board tests, but hasn't been tested on physical Windows PCs or pen tablets yet. Windows boards use <code>.wslate</code> and aren't interchangeable with Mac <code>.slate</code> files. Export or copy a PNG to share between them. Prefer to build it yourself? Get the <a href="downloads/problem-slate-Windows-source.zip" download>Windows source</a> and the .NET 10 SDK.</p></div>
+      <div class="requirements"><strong>Preview status</strong><p>Version 1.7 for Windows 10/11 x64 passes its automated board tests on a Windows build machine, but hasn't yet been hands-on tested on Windows PCs or with pen tablets. Windows boards use <code>.wslate</code> and aren't interchangeable with Mac <code>.slate</code> files. Export or copy a PNG to share between them. Prefer to build it yourself? Get the <a href="downloads/problem-slate-Windows-source.zip" download>Windows source</a> and the .NET 10 SDK.</p></div>
     </section>
 
     <section class="download-band" aria-labelledby="download-title">
@@ -149,7 +149,7 @@
   <footer>
     <a class="brand footer-brand" href="#top"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg><span>problem-slate</span></a>
     <p>Focused tools for difficult problems. Version 1.7.</p>
-    <nav aria-label="Downloads"><a href="downloads/problem-slate-macOS.zip" download>Mac</a><a href="downloads/problem-slate-Windows.zip" download>Windows</a></nav>
+    <nav aria-label="Downloads"><a href="downloads/problem-slate-macOS-app.zip" download>Mac</a><a href="downloads/problem-slate-Windows.zip" download>Windows</a></nav>
   </footer>
   <script src="script.js?v=17"></script>
   <!-- Vercel Web Analytics -->

@@ -37,6 +37,12 @@ jobs:
           iconutil -c icns Assets/problem-slate.iconset -o "$APP/Contents/Resources/problem-slate.icns"
           codesign --force --deep --sign - "$APP"
           cd dist && ditto -c -k --keepParent problem-slate.app "$GITHUB_WORKSPACE/problem-slate-macOS-app.zip"
+      - name: Verify the published Mac app
+        run: |
+          mkdir published && ditto -x -k downloads/problem-slate-macOS-app.zip published
+          codesign --verify --deep --strict --verbose=2 published/problem-slate.app
+          lipo -info published/problem-slate.app/Contents/MacOS/problem-slate
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' published/problem-slate.app/Contents/Info.plist
       - uses: actions/upload-artifact@v4
         with:
           name: problem-slate-macOS-app
