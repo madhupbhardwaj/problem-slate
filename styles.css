@@ -124,6 +124,11 @@ kbd { display: inline-block; min-width: 26px; padding: 5px 7px; border: 1px soli
 /* Shortcuts */
 .shortcuts { max-width: var(--page); margin: 0 auto; padding: 130px 0 40px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; }
 .shortcut-note { margin: 22px 0 0; color: var(--muted); font: 500 .8rem/1.5 var(--mono); }
+.guide-link { margin-top: 26px; display: inline-flex; align-items: center; gap: 12px; padding: 13px 18px 13px 14px; border: 1px solid var(--ink); border-radius: 9px; background: white; text-decoration: none; transition: transform .18s ease, background .18s ease, color .18s ease; }
+.guide-link:hover { transform: translateY(-2px); background: var(--ink); color: white; }
+.guide-link svg { width: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.guide-link span { display: flex; flex-direction: column; gap: 6px; font: 700 .86rem/1 var(--mono); }
+.guide-link small { font: 500 .7rem/1 var(--mono); opacity: .66; }
 .shortcut-grid { margin: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
 .shortcut-grid div { display: flex; flex-direction: column; gap: 10px; padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line); }
 .shortcut-grid div:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--line); }
