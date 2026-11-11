@@ -1,0 +1,70 @@
+# Compiles and tests the app sources published in downloads/ so a broken ZIP never reaches the website.
+# The macOS job also produces a ready-to-run problem-slate.app as a downloadable artifact.
+name: Build apps
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'downloads/**'
+      - '.github/workflows/build-apps.yml'
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack Mac source
+        run: unzip -q downloads/problem-slate-macOS.zip -d build
+      - name: Build
+        working-directory: build/Slate
+        run: swift build -c release
+      - name: Run tests
+        working-directory: build/Slate
+        run: swift test
+      - name: Assemble problem-slate.app
+        working-directory: build/Slate
+        run: |
+          BIN_DIR="$(swift build -c release --show-bin-path)"
+          APP="$PWD/dist/problem-slate.app"
+          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+          cp "$BIN_DIR/Slate" "$APP/Contents/MacOS/problem-slate"
+          cp scripts/Info.plist "$APP/Contents/Info.plist"
+          cp -R "$BIN_DIR/Slate_Slate.bundle" "$APP/Contents/Resources/"
+          iconutil -c icns Assets/problem-slate.iconset -o "$APP/Contents/Resources/problem-slate.icns"
+          codesign --force --deep --sign - "$APP"
+          cd dist && ditto -c -k --keepParent problem-slate.app "$GITHUB_WORKSPACE/problem-slate-macOS-app.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: problem-slate-macOS-app
+          path: problem-slate-macOS-app.zip
+          if-no-files-found: error
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Unpack Windows source
+        shell: pwsh
+        run: Expand-Archive downloads/problem-slate-Windows-source.zip -DestinationPath build
+      - name: Build and run board smoke tests
+        shell: pwsh
+        working-directory: build/problem-slate-windows
+        run: |
+          dotnet build ProblemSlate.csproj -c Release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $process = Start-Process dotnet -ArgumentList 'bin/Release/net10.0-windows/problem-slate.dll --smoke-test' -PassThru -Wait
+          Get-Content smoke-test-result.txt
+          if ($process.ExitCode -ne 0) { exit $process.ExitCode }
+      - name: Check the published EXE starts its smoke tests
+        shell: pwsh
+        run: |
+          Expand-Archive downloads/problem-slate-Windows.zip -DestinationPath published
+          Push-Location published/problem-slate-Windows
+          $process = Start-Process ./problem-slate.exe -ArgumentList '--smoke-test' -PassThru -Wait
+          Get-Content smoke-test-result.txt
+          Pop-Location
+          if ($process.ExitCode -ne 0) { exit $process.ExitCode }
