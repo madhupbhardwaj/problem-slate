@@ -62,7 +62,11 @@ jobs:
         working-directory: build/problem-slate-windows
         run: |
           $process = Start-Process dotnet -ArgumentList 'bin/Release/net10.0-windows/problem-slate.dll --smoke-test' -PassThru
-          if (-not $process.WaitForExit(180000)) { Stop-Process -Id $process.Id -Force; Write-Error 'Smoke tests timed out'; exit 1 }
+          if (-not $process.WaitForExit(180000)) {
+            Write-Host 'Smoke tests timed out. Progress:'; Get-Content smoke-test-progress.txt -ErrorAction SilentlyContinue
+            Write-Host 'Open windows:'; Get-Process | Where-Object { $_.MainWindowTitle } | Format-Table Id, ProcessName, MainWindowTitle -AutoSize | Out-String | Write-Host
+            Stop-Process -Id $process.Id -Force; exit 1
+          }
           Get-Content smoke-test-result.txt
           if ($process.ExitCode -ne 0) { exit $process.ExitCode }
       - name: Check the published EXE passes its smoke tests
@@ -72,6 +76,10 @@ jobs:
           Expand-Archive downloads/problem-slate-Windows.zip -DestinationPath published
           Set-Location published/problem-slate-Windows
           $process = Start-Process ./problem-slate.exe -ArgumentList '--smoke-test' -PassThru
-          if (-not $process.WaitForExit(180000)) { Stop-Process -Id $process.Id -Force; Write-Error 'Smoke tests timed out'; exit 1 }
+          if (-not $process.WaitForExit(180000)) {
+            Write-Host 'Smoke tests timed out. Progress:'; Get-Content smoke-test-progress.txt -ErrorAction SilentlyContinue
+            Write-Host 'Open windows:'; Get-Process | Where-Object { $_.MainWindowTitle } | Format-Table Id, ProcessName, MainWindowTitle -AutoSize | Out-String | Write-Host
+            Stop-Process -Id $process.Id -Force; exit 1
+          }
           Get-Content smoke-test-result.txt
           if ($process.ExitCode -ne 0) { exit $process.ExitCode }
