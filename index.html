@@ -4,82 +4,157 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090909">
-  <meta name="description" content="problem-slate is a focused, pressure-aware whiteboard for macOS and Windows.">
+  <meta name="description" content="problem-slate is a focused, pressure-aware whiteboard for macOS and Windows. Straight lines, highlighter, chisel pen, images and a calm dot-grid canvas.">
+  <meta property="og:title" content="problem-slate — a focused whiteboard for macOS and Windows">
+  <meta property="og:description" content="A quiet, pressure-aware canvas for working through problems.">
+  <meta property="og:image" content="app-icon.png">
   <title>problem-slate — a focused whiteboard for macOS and Windows</title>
   <link rel="icon" href="favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="favicon-32x32.png?v=2" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2" sizes="180x180">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="problem-slate home">
       <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg>
       <span>problem-slate</span>
     </a>
-    <nav aria-label="Main navigation"><a href="#features">Features</a><a href="#install">Install</a><a class="nav-download" href="#downloads">Download</a></nav>
+    <nav aria-label="Main navigation"><a href="#new">What's new</a><a href="#features">Features</a><a href="#shortcuts">Shortcuts</a><a href="#install">Install</a><a class="nav-download" href="#downloads">Download</a></nav>
   </header>
-  <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">A focused whiteboard for macOS and Windows</p>
+        <p class="eyebrow"><span class="badge">New · v1.7</span> A focused whiteboard for macOS and Windows</p>
         <h1 id="hero-title">Think with<br>your pen.</h1>
-        <p class="lede">A quiet canvas for working through problems. Write naturally with a pen tablet, highlight what matters, and keep your board close.</p>
+        <p class="lede">A quiet canvas for working through problems. Write naturally with a pen tablet, snap a straight line with Shift, highlight what matters and keep your board close.</p>
         <div class="hero-actions" id="downloads">
-          <a class="button primary" href="downloads/problem-slate-macOS.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>Download Mac source</a>
-          <a class="button secondary" href="downloads/problem-slate-Windows-source.zip" download>Download Windows source</a>
+          <a class="button primary" data-os="mac" href="downloads/problem-slate-macOS-app.zip" download>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>
+            <span>Download for Mac<small>Ready to run · Apple silicon &amp; Intel · 0.6 MB</small></span>
+          </a>
+          <a class="button secondary" data-os="windows" href="https://github.com/madhupbhardwaj/problem-slate/releases/download/v1.7/problem-slate-Windows.zip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"></path></svg>
+            <span>Download for Windows<small>Ready to run · .exe · 59 MB</small></span>
+          </a>
         </div>
-        <p class="release-note">Version 1.6 developer previews · Shared interface and icon set · One local build required.<br>Mac: macOS 13+ · Windows: Windows 11 x64.<br><a href="#install">Mac installation</a> · <a href="#install-windows">Windows installation</a></p>
+        <p class="release-note">Version 1.7 previews · macOS 13+ · Windows 10/11 x64.<br><a href="#install">Mac installation</a> · <a href="#install-windows">Windows installation</a> · Source: <a href="downloads/problem-slate-macOS.zip" download>Mac</a>, <a href="downloads/problem-slate-Windows-source.zip" download>Windows</a></p>
       </div>
-      <div class="product-frame" aria-label="Illustration of the problem-slate drawing canvas">
-        <div class="window-bar"><span class="traffic red"></span><span class="traffic yellow"></span><span class="traffic green"></span><span class="window-title">problem-slate</span></div>
+
+      <div class="product-frame" aria-label="Illustration of the problem-slate app: a dark sidebar of tools beside a dotted white board with handwritten working">
+        <div class="window-bar">
+          <span class="traffic red"></span><span class="traffic yellow"></span><span class="traffic green"></span>
+          <span class="window-brand"><img src="assets/tool-icons/Brand.png" alt="">problem-slate</span>
+          <span class="window-file"><i></i>integral practice</span>
+          <span class="window-actions" aria-hidden="true"><b>Copy</b><b class="export">Export PNG</b></span>
+        </div>
         <div class="app-body">
-          <div class="tool-rail" aria-hidden="true"><span class="tool"><img src="assets/tool-icons/Select.png" alt="">Select</span><span class="tool"><img src="assets/tool-icons/Pan.png" alt="">Pan</span><span class="tool active"><img src="assets/tool-icons/Pen.png" alt="">Pen</span><span class="tool"><img src="assets/tool-icons/Chisel.png" alt="">Chisel</span><span class="tool"><img src="assets/tool-icons/Highlighter.png" alt="">Highlighter</span><span class="tool"><img src="assets/tool-icons/Eraser.png" alt="">Eraser</span></div>
+          <div class="tool-rail" aria-hidden="true">
+            <span class="rail-label">TOOLS</span>
+            <span class="tool"><img src="assets/tool-icons/Select.png" alt="">Select<kbd>V</kbd></span>
+            <span class="tool"><img src="assets/tool-icons/Pan.png" alt="">Pan<kbd>M</kbd></span>
+            <span class="tool active"><img src="assets/tool-icons/Pen.png" alt="">Pen<kbd>P</kbd></span>
+            <span class="tool"><img src="assets/tool-icons/Chisel.png" alt="">Chisel<kbd>C</kbd></span>
+            <span class="tool"><img src="assets/tool-icons/Highlighter.png" alt="">Highlighter<kbd>H</kbd></span>
+            <span class="tool"><img src="assets/tool-icons/Eraser.png" alt="">Eraser<kbd>E</kbd></span>
+            <span class="rail-label">COLOR</span>
+            <span class="swatches"><i class="on" style="--c:#0a0a0a"></i><i style="--c:#8e8e93"></i><i style="--c:#0095ff"></i><i style="--c:#ff404a"></i></span>
+            <span class="rail-label">BRUSH</span>
+            <span class="brush-preview"><svg viewBox="0 0 100 30"><path d="M8 17c10-10 22-10 30-2s22 9 30 1 18-7 24-2"></path></svg></span>
+          </div>
           <div class="canvas">
             <div class="problem">∫ <span>x² + 2x</span> dx</div>
-            <svg class="ink" viewBox="0 0 560 310" aria-hidden="true"><path d="M74 124c51 7 99 2 153-3"></path><path class="answer" d="M94 188c28 7 42 9 71 4 31-5 57-18 89-13 27 4 48 22 77 19 40-5 67-37 112-28"></path><path class="highlight" d="M281 88c45-4 90-5 137-1"></path></svg>
-            <span class="annotation">work it out</span>
+            <svg class="ink" viewBox="0 0 560 310" aria-hidden="true">
+              <path class="highlight" d="M281 88c45-4 90-5 137-1"></path>
+              <path d="M74 124c51 7 99 2 153-3"></path>
+              <path class="answer" d="M94 188c28 7 42 9 71 4 31-5 57-18 89-13 27 4 48 22 77 19 40-5 67-37 112-28"></path>
+              <path class="straight" d="M94 236L460 236"></path>
+            </svg>
+            <span class="annotation">⇧ straight line</span>
           </div>
         </div>
+        <div class="status-bar" aria-hidden="true"><span><i></i>Tablet pen · pressure 64%</span><span class="hint">Hold ⇧ for a straight line · Space to pan</span><span class="zoom">Fit &nbsp;−&nbsp; 100% &nbsp;+</span></div>
       </div>
     </section>
+
+    <section class="whats-new" id="new" aria-labelledby="new-title">
+      <div class="section-intro light"><p class="eyebrow">What's new in 1.7</p><h2 id="new-title">Smoother to use,<br>calmer to look at.</h2></div>
+      <ul class="new-grid">
+        <li><kbd>⇧</kbd><h3>Straight lines</h3><p>Hold Shift while you draw and the stroke becomes a clean line from where you started.</p></li>
+        <li><kbd>[ ]</kbd><h3>Sizes that stick</h3><p>Every tool remembers its own size. Change it with the bracket keys or one-tap presets, and see it in a live brush preview.</p></li>
+        <li><kbd>⌘9</kbd><h3>Zoom to fit</h3><p>Zoom from 10% to 400%, around your pointer. Pinch on a Mac trackpad, fit the whole board, and pan with Space.</p></li>
+        <li><kbd>Drop</kbd><h3>Drag in images</h3><p>Drop image files straight onto the board, then nudge them into place with the arrow keys.</p></li>
+        <li><kbd>⇧⌘C</kbd><h3>Copy the board</h3><p>Copy the whole board as an image and paste it into a chat, an email or your notes.</p></li>
+        <li><kbd>.app</kbd><h3>Ready to run</h3><p>Both downloads are now finished apps: a universal Mac app and a single Windows EXE. Nothing to build or install.</p></li>
+      </ul>
+    </section>
+
     <section class="feature-strip" id="features" aria-labelledby="features-title">
       <div class="section-intro"><p class="eyebrow">Made for working things out</p><h2 id="features-title">Only the tools<br>you need.</h2></div>
       <div class="feature-grid">
-        <article><span>01</span><h3>Natural ink</h3><p>Round and chisel pens respond to pressure from supported pen tablets. Pan across an adjustable 4096 × 4096 canvas.</p></article>
-        <article><span>02</span><h3>Mark it up</h3><p>Paste images, move and resize them, then write or highlight on top.</p></article>
-        <article><span>03</span><h3>Light or dark</h3><p>Use a white board with visible black dots or switch to black and your black ink becomes white automatically.</p></article>
-        <article><span>04</span><h3>Keep your work</h3><p>Save editable boards, recover your latest work, or export the full canvas as PNG.</p></article>
+        <article><span>01</span><h3>Natural ink</h3><p>Round and chisel pens respond to pressure from supported pen tablets. A translucent highlighter builds up with each pass.</p></article>
+        <article><span>02</span><h3>Mark it up</h3><p>Paste or drop images, move and resize them, then write or highlight on top. The eraser only removes ink.</p></article>
+        <article><span>03</span><h3>Light or dark</h3><p>A white board with a dot grid, or switch to black and your black ink turns white automatically.</p></article>
+        <article><span>04</span><h3>Keep your work</h3><p>Boards autosave for recovery. Save editable boards, export the full canvas as PNG, or copy it in one keystroke.</p></article>
       </div>
     </section>
+
+    <section class="shortcuts" id="shortcuts" aria-labelledby="shortcuts-title">
+      <div class="install-heading"><p class="eyebrow">Keyboard</p><h2 id="shortcuts-title">Keep your<br>hands on the pen.</h2><p class="shortcut-note">Shown for Mac. On Windows, use Ctrl for ⌘.</p></div>
+      <dl class="shortcut-grid">
+        <div><dt><kbd>P</kbd><kbd>C</kbd><kbd>H</kbd><kbd>E</kbd></dt><dd>Pen, chisel, highlighter, eraser</dd></div>
+        <div><dt><kbd>V</kbd><kbd>M</kbd></dt><dd>Select images · pan</dd></div>
+        <div><dt><kbd>⇧</kbd> + draw</dt><dd>Straight line</dd></div>
+        <div><dt><kbd>Space</kbd> + drag</dt><dd>Pan with any tool</dd></div>
+        <div><dt><kbd>[</kbd><kbd>]</kbd></dt><dd>Smaller · larger brush</dd></div>
+        <div><dt><kbd>⌘</kbd> + scroll</dt><dd>Zoom around the pointer</dd></div>
+        <div><dt><kbd>⌘9</kbd><kbd>⌘0</kbd></dt><dd>Zoom to fit · actual size</dd></div>
+        <div><dt><kbd>⌘V</kbd> or drop</dt><dd>Add an image</dd></div>
+        <div><dt><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></dt><dd>Nudge the selected image (⇧ for 10)</dd></div>
+        <div><dt><kbd>⌘Z</kbd><kbd>⇧⌘Z</kbd></dt><dd>Undo · redo</dd></div>
+        <div><dt><kbd>⇧⌘C</kbd></dt><dd>Copy board as image</dd></div>
+        <div><dt><kbd>⇧⌘E</kbd></dt><dd>Export PNG</dd></div>
+      </dl>
+    </section>
+
     <section class="install" id="install" aria-labelledby="install-title">
-      <div class="install-heading"><p class="eyebrow">Install</p><h2 id="install-title">On your Mac.<br>One local build.</h2></div>
+      <div class="install-heading"><p class="eyebrow">Install on Mac</p><h2 id="install-title">On your Mac.<br>Nothing to build.</h2></div>
       <ol class="steps">
-        <li><span>1</span><div><h3>Download and unzip</h3><p>Download the package, then double-click the ZIP in Finder.</p></div></li>
-        <li><span>2</span><div><h3>Run the builder</h3><p>In Terminal, type <code>bash </code>, drag <strong>Build-and-Run.command</strong> into the window, and press Return.</p></div></li>
-        <li><span>3</span><div><h3>Move it to Applications</h3><p>Drag <strong>dist/problem-slate.app</strong> into your Applications folder.</p></div></li>
+        <li><span>1</span><div><h3>Download and unzip</h3><p><a href="downloads/problem-slate-macOS-app.zip" download>Download for Mac</a>. Safari unzips it for you; otherwise double-click the ZIP in Finder.</p></div></li>
+        <li><span>2</span><div><h3>Move it to Applications</h3><p>Drag <strong>problem-slate.app</strong> into your Applications folder.</p></div></li>
+        <li><span>3</span><div><h3>Open it the first time</h3><p>The app isn't notarized by Apple yet, so macOS asks first. On macOS 15 or later, open it once, then go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. On macOS 13–14, Control-click the app, choose <strong>Open</strong>, then <strong>Open</strong> again.</p></div></li>
       </ol>
-      <div class="requirements"><strong>Before you start</strong><p>This release contains source code and builds on your Mac. It requires macOS 13+ and Apple Command Line Tools. If needed, run <code>xcode-select --install</code> once. The app is locally signed and has not been Apple-notarized.</p></div>
+      <div class="requirements"><strong>Good to know</strong><p>A universal app for Apple silicon and Intel Macs running macOS 13 or later. It's compiled and its automated tests pass on a macOS build machine, but this release hasn't yet been hands-on tested on a Mac or with pen tablets. Updating from 1.6? Your <code>.slate</code> boards and recovery data carry over. Prefer to build it yourself? The <a href="downloads/problem-slate-macOS.zip" download>Mac source</a> builds with one command and Apple's Command Line Tools.</p></div>
     </section>
+
     <section class="install" id="install-windows" aria-labelledby="windows-title">
-      <div class="install-heading"><p class="eyebrow">Windows developer preview</p><h2 id="windows-title">The same tools.<br>A Windows canvas.</h2></div>
+      <div class="install-heading"><p class="eyebrow">Install on Windows</p><h2 id="windows-title">The same tools.<br>Nothing to build.</h2></div>
       <ol class="steps">
-        <li><span>1</span><div><h3>Download and extract</h3><p>Choose Download for Windows, then use <strong>Extract All</strong> on the ZIP.</p></div></li>
-        <li><span>2</span><div><h3>Install the free build tools</h3><p>Install the <a href="https://dotnet.microsoft.com/download/dotnet/10.0">.NET 10 SDK for Windows x64</a>. This is needed only to build the app.</p></div></li>
-        <li><span>3</span><div><h3>Build once, then open</h3><p>Double-click <strong>Build-and-Run.cmd</strong>. Afterwards, open <strong>dist/win-x64/problem-slate.exe</strong> directly.</p></div></li>
+        <li><span>1</span><div><h3>Download and extract</h3><p><a href="https://github.com/madhupbhardwaj/problem-slate/releases/download/v1.7/problem-slate-Windows.zip">Download for Windows</a>, then right-click the ZIP and choose <strong>Extract All</strong>.</p></div></li>
+        <li><span>2</span><div><h3>Open problem-slate.exe</h3><p>Double-click <strong>problem-slate.exe</strong> in the extracted folder. Everything it needs is inside the EXE.</p></div></li>
+        <li><span>3</span><div><h3>If Windows asks</h3><p>The app isn't code-signed yet, so SmartScreen may show "Windows protected your PC". Choose <strong>More info</strong>, then <strong>Run anyway</strong>.</p></div></li>
       </ol>
-      <div class="requirements"><strong>Preview status</strong><p>The version 1.6 Windows source has expanded smoke tests but has not yet been compiled or tested on Windows or pen-tablet hardware. Its layout, logo, tool icons and default sizes match the Mac source. It includes a white board with black dots, pen, chisel, highlighter, eraser, pan, image paste, dark mode, undo and recovery. Windows boards use .wslate; Mac .slate files are not interchangeable. Use PNG to share flattened boards. No paid developer account is required. The built EXE is unsigned.</p></div>
+      <div class="requirements"><strong>Preview status</strong><p>Version 1.7 for Windows 10/11 x64 passes its automated board tests on a Windows build machine, but hasn't yet been hands-on tested on Windows PCs or with pen tablets. Windows boards use <code>.wslate</code> and aren't interchangeable with Mac <code>.slate</code> files. Export or copy a PNG to share between them. Prefer to build it yourself? Get the <a href="downloads/problem-slate-Windows-source.zip" download>Windows source</a> and the .NET 10 SDK.</p></div>
     </section>
+
     <section class="download-band" aria-labelledby="download-title">
       <img src="app-icon.png" width="112" height="112" alt="problem-slate pen icon">
       <div><h2 id="download-title">Your next idea needs room.</h2><p>Open a clean board and start writing.</p></div>
       <a class="button light" href="#downloads">Choose your download</a>
     </section>
   </main>
+
   <footer>
     <a class="brand footer-brand" href="#top"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="10"></rect><path d="M30.5 13.5l6 6-16.7 16.7-8.2 2.3 2.3-8.2z"></path><path class="nib-line" d="M28.5 18.5l3 3M15 39h8"></path></svg><span>problem-slate</span></a>
-    <p>Focused tools for difficult problems.</p><a href="#downloads">Mac &amp; Windows downloads</a>
+    <p>Focused tools for difficult problems. Version 1.7.</p>
+    <nav aria-label="Downloads"><a href="downloads/problem-slate-macOS-app.zip" download>Mac</a><a href="https://github.com/madhupbhardwaj/problem-slate/releases/download/v1.7/problem-slate-Windows.zip">Windows</a></nav>
   </footer>
-  <script src="script.js"></script>
+  <script src="script.js?v=17"></script>
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Vercel Speed Insights -->
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>

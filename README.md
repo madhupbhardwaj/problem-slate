@@ -1,8 +1,23 @@
-# problem-slate website — Mac + Windows developer previews
+# problem-slate website — version 1.7 (Mac + Windows)
 
 This is the updated static website package for the existing Vercel/GitHub deployment.
-It is not automatically deployed. Both buttons include the latest interface-aligned
-source packages. Windows remains clearly labeled as an untested developer preview.
+Static site deployed from GitHub to Vercel. Downloads in `downloads/`:
+
+| File | What it is |
+| --- | --- |
+| `problem-slate-macOS-app.zip` | Ready-to-run universal Mac app (Apple silicon + Intel), ad-hoc signed, not notarized |
+| `problem-slate-macOS.zip` | Mac source; `Build-and-Run.command` builds `problem-slate.app` locally |
+| *(GitHub Release `v1.7`)* `problem-slate-Windows.zip` | Ready-to-run Windows x64 app (single `problem-slate.exe`, ~57 MB). Too big for browser uploads, so it lives in the release, not in `downloads/` |
+| `problem-slate-Windows-source.zip` | Windows WPF source and build script |
+
+`.github/workflows/build-apps.yml` compiles and tests both apps from these ZIPs on every
+change to `downloads/`, and checks the published Mac app's signature and the Windows EXE.
+The macOS job uploads a freshly built universal `problem-slate.app` as a run artifact.
+
+## Updating the Mac app
+After changing `problem-slate-macOS.zip`, push it, wait for the "Build apps" workflow, download
+its `problem-slate-macOS-app` artifact, and replace `downloads/problem-slate-macOS-app.zip` with
+the `problem-slate-macOS-app.zip` inside it.
 
 ## Deploy using your existing GitHub → Vercel connection
 1. Extract this ZIP.
@@ -18,9 +33,10 @@ source packages. Windows remains clearly labeled as an untested developer previe
 If importing as a new Vercel project, choose Other/static, with no build command and
 root output directory. No npm dependencies or backend are needed.
 
-## When a Windows EXE is tested and ready
-The source ZIP includes a GitHub Actions workflow for building the executable on Windows
-without having a Windows PC for compilation. Hardware testing still needs a Windows PC.
-Publish the tested executable ZIP on a release host, change the Windows button href to
-that download URL, and update the Windows installation section to extract and open the EXE.
-Do not describe the supplied source archive as a ready-to-run installer.
+## Updating the Windows EXE
+The Windows app is hosted as an asset on the GitHub Release `v1.7` (browser uploads to the
+repository are limited to 25 MB). For a new version: build it with the Windows source's
+`Build-and-Run.cmd` (or the CI workflow), zip `problem-slate.exe` inside a `problem-slate-Windows/`
+folder with its README.txt, create a new release (for example `v1.8`), attach the ZIP, and update
+the three Windows links in `index.html` and the URL in `.github/workflows/build-apps.yml`.
+The EXE is unsigned and has not yet been tested hands-on on Windows PCs or pen tablets.
