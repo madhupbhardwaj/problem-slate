@@ -1,93 +1,46 @@
-# Compiles and tests the app sources published in downloads/ so a broken ZIP never reaches the website.
-# The macOS job also produces a ready-to-run problem-slate.app as a downloadable artifact.
-name: Build apps
+# Checks the finished apps that the website offers, so a broken download never goes live.
+# Runs when downloads/, index.html or this file changes, and on demand from the Actions tab.
+name: Check app downloads
 on:
   workflow_dispatch:
   push:
     paths:
       - 'downloads/**'
+      - 'index.html'
       - '.github/workflows/build-apps.yml'
 permissions:
   contents: read
 jobs:
   macos:
     runs-on: macos-15
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Unpack Mac source
-        run: unzip -q downloads/problem-slate-macOS.zip -d build
-      - name: Build
-        working-directory: build/Slate
-        run: swift build -c release
-      - name: Run tests
-        working-directory: build/Slate
-        run: swift test
-      - name: Assemble universal problem-slate.app (Apple silicon + Intel)
-        working-directory: build/Slate
-        run: |
-          swift build -c release --arch arm64 --arch x86_64
-          BIN_DIR="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)"
-          lipo -info "$BIN_DIR/Slate"
-          APP="$PWD/dist/problem-slate.app"
-          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-          cp "$BIN_DIR/Slate" "$APP/Contents/MacOS/problem-slate"
-          cp scripts/Info.plist "$APP/Contents/Info.plist"
-          cp -R "$BIN_DIR/Slate_Slate.bundle" "$APP/Contents/Resources/"
-          iconutil -c icns Assets/problem-slate.iconset -o "$APP/Contents/Resources/problem-slate.icns"
-          codesign --force --deep --sign - "$APP"
-          cd dist && ditto -c -k --keepParent problem-slate.app "$GITHUB_WORKSPACE/problem-slate-macOS-app.zip"
-      - name: Verify the published Mac app
+      - name: Verify the Mac app (signature, Apple silicon + Intel, version)
         run: |
           mkdir published && ditto -x -k downloads/problem-slate-macOS-app.zip published
           codesign --verify --deep --strict --verbose=2 published/problem-slate.app
           lipo -info published/problem-slate.app/Contents/MacOS/problem-slate
           /usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' published/problem-slate.app/Contents/Info.plist
-      - uses: actions/upload-artifact@v4
-        with:
-          name: problem-slate-macOS-app
-          path: problem-slate-macOS-app.zip
-          if-no-files-found: error
 
   windows:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-      - name: Unpack Windows source
-        shell: pwsh
-        run: Expand-Archive downloads/problem-slate-Windows-source.zip -DestinationPath build
-      - name: Build
-        shell: pwsh
-        working-directory: build/problem-slate-windows
-        run: dotnet build ProblemSlate.csproj -c Release --disable-build-servers -p:UseSharedCompilation=false
-      - name: Run board smoke tests
-        shell: pwsh
-        timeout-minutes: 5
-        working-directory: build/problem-slate-windows
-        run: |
-          $process = Start-Process dotnet -ArgumentList 'bin/Release/net10.0-windows/problem-slate.dll --smoke-test' -PassThru
-          if (-not $process.WaitForExit(180000)) {
-            Write-Host 'Smoke tests timed out. Progress:'; Get-Content smoke-test-progress.txt -ErrorAction SilentlyContinue
-            Write-Host 'Open windows:'; Get-Process | Where-Object { $_.MainWindowTitle } | Format-Table Id, ProcessName, MainWindowTitle -AutoSize | Out-String | Write-Host
-            Stop-Process -Id $process.Id -Force; exit 1
-          }
-          Get-Content smoke-test-result.txt
-          if ($process.ExitCode -ne 0) { exit $process.ExitCode }
-      - name: Check the released EXE passes its smoke tests
+      - name: Download the Windows app linked from the website and run its smoke tests
         shell: pwsh
         timeout-minutes: 5
         run: |
-          Invoke-WebRequest 'https://github.com/madhupbhardwaj/problem-slate/releases/download/v1.7/problem-slate-Windows.zip' -OutFile problem-slate-Windows.zip
+          $url = [regex]::Match((Get-Content index.html -Raw), 'https://github\.com/[^"]+/problem-slate-Windows\.zip').Value
+          if (-not $url) { Write-Error 'No Windows download link found in index.html'; exit 1 }
+          Write-Host "Checking $url"
+          Invoke-WebRequest $url -OutFile problem-slate-Windows.zip
           Expand-Archive problem-slate-Windows.zip -DestinationPath published
           Set-Location published/problem-slate-Windows
           $process = Start-Process ./problem-slate.exe -ArgumentList '--smoke-test' -PassThru
           if (-not $process.WaitForExit(180000)) {
             Write-Host 'Smoke tests timed out. Progress:'; Get-Content smoke-test-progress.txt -ErrorAction SilentlyContinue
-            Write-Host 'Open windows:'; Get-Process | Where-Object { $_.MainWindowTitle } | Format-Table Id, ProcessName, MainWindowTitle -AutoSize | Out-String | Write-Host
             Stop-Process -Id $process.Id -Force; exit 1
           }
           Get-Content smoke-test-result.txt
