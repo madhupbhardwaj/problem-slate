@@ -77,11 +77,12 @@ jobs:
           }
           Get-Content smoke-test-result.txt
           if ($process.ExitCode -ne 0) { exit $process.ExitCode }
-      - name: Check the published EXE passes its smoke tests
+      - name: Check the released EXE passes its smoke tests
         shell: pwsh
         timeout-minutes: 5
         run: |
-          Expand-Archive downloads/problem-slate-Windows.zip -DestinationPath published
+          Invoke-WebRequest 'https://github.com/madhupbhardwaj/problem-slate/releases/download/v1.7/problem-slate-Windows.zip' -OutFile problem-slate-Windows.zip
+          Expand-Archive problem-slate-Windows.zip -DestinationPath published
           Set-Location published/problem-slate-Windows
           $process = Start-Process ./problem-slate.exe -ArgumentList '--smoke-test' -PassThru
           if (-not $process.WaitForExit(180000)) {

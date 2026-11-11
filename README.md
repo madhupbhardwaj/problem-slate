@@ -7,7 +7,7 @@ Static site deployed from GitHub to Vercel. Downloads in `downloads/`:
 | --- | --- |
 | `problem-slate-macOS-app.zip` | Ready-to-run universal Mac app (Apple silicon + Intel), ad-hoc signed, not notarized |
 | `problem-slate-macOS.zip` | Mac source; `Build-and-Run.command` builds `problem-slate.app` locally |
-| `problem-slate-Windows.zip` | Ready-to-run Windows x64 app (single self-contained `problem-slate.exe`, ~59 MB) |
+| *(GitHub Release `v1.7`)* `problem-slate-Windows.zip` | Ready-to-run Windows x64 app (single `problem-slate.exe`, ~57 MB). Too big for browser uploads, so it lives in the release, not in `downloads/` |
 | `problem-slate-Windows-source.zip` | Windows WPF source and build script |
 
 `.github/workflows/build-apps.yml` compiles and tests both apps from these ZIPs on every
@@ -34,7 +34,9 @@ If importing as a new Vercel project, choose Other/static, with no build command
 root output directory. No npm dependencies or backend are needed.
 
 ## Updating the Windows EXE
-Build it with the Windows source's `Build-and-Run.cmd` (or the CI workflow), zip the
-`problem-slate.exe` inside a `problem-slate-Windows/` folder with its README.txt, and replace
-`downloads/problem-slate-Windows.zip`. Keep the ZIP under GitHub's 100 MB file limit.
-The EXE is unsigned and has not yet been tested on physical Windows PCs or pen tablets.
+The Windows app is hosted as an asset on the GitHub Release `v1.7` (browser uploads to the
+repository are limited to 25 MB). For a new version: build it with the Windows source's
+`Build-and-Run.cmd` (or the CI workflow), zip `problem-slate.exe` inside a `problem-slate-Windows/`
+folder with its README.txt, create a new release (for example `v1.8`), attach the ZIP, and update
+the three Windows links in `index.html` and the URL in `.github/workflows/build-apps.yml`.
+The EXE is unsigned and has not yet been tested hands-on on Windows PCs or pen tablets.
